@@ -1,0 +1,12 @@
+{
+  "name": "Quizizz-cheat",
+  "version": "1.0",
+  "description": "Quizizz cheat",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["*"],
+      "js": ["bundle.js"]
+    }
+  ]
+}

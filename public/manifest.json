@@ -5,8 +5,9 @@
   "manifest_version": 2,
   "content_scripts": [
     {
-      "matches": ["*"],
+      "matches": ["https://quizizz.com/*"],
       "js": ["bundle.js"]
     }
-  ]
+  ],
+  "permissions": ["activeTab"]
 }

@@ -2,6 +2,38 @@ import { ServerRequest, ServerResponse, VueElement } from "./types";
 
 console.log("Hi there!");
 
+const getQuestionVueObject = () => {
+  const questionsElem = document.querySelector(
+    "body > div > div.root-component > div > div > div > div.page-container.in-quiz > div.screen.screen-game > div.transitioner.transitioner-component > div > div > div > div > div > div.options-container"
+  ) as VueElement | null;
+  if (!questionsElem)
+    throw new Error("Unable to retreive questions list element");
+  const vueObject = questionsElem.__vue__;
+  if (!vueObject)
+    throw new Error("Unable to retreive vue object on questions list element");
+  return vueObject;
+};
+
+const getAnswersForArray = (anwsers: any[]) => {
+  const vueObject = getQuestionVueObject();
+  const validAnswers = vueObject.options
+    .filter((e) => anwsers.some((v) => v === e.actualIndex))
+    .map((e) => e.text);
+  console.log(validAnswers);
+};
+const getAnwsersForSingle = (anwser: number) => {
+  const vueObject = getQuestionVueObject();
+  const validAnswers = vueObject.options
+    .filter((e) => e.actualIndex === anwser)
+    .map((e) => e.text);
+  console.log(validAnswers);
+};
+
+const getAnwsersForText = (obj: any[]) => {
+  const anwsers = obj.map((e) => e.text);
+  console.log(anwsers);
+};
+
 const sendResponse = async (request: ServerRequest): Promise<void> => {
   const res = await fetch("https://game.quizizz.com/play-api/v4/proceedGame", {
     headers: {
@@ -26,7 +58,12 @@ const sendResponse = async (request: ServerRequest): Promise<void> => {
 
   const json = (await res.json()) as ServerResponse;
   console.log(json);
-  console.log(json.question);
+  const answer = json.question.structure.answer;
+  if (answer instanceof Array && answer.length > 0) getAnswersForArray(answer);
+  else if (typeof answer == "number") getAnwsersForSingle(answer);
+  else if (json.question.structure.options)
+    getAnwsersForText(json.question.structure.options);
+  else console.log("Unable to detect automaticcly anwser type", json.question);
 };
 
 const getQuestionInfo = (): {
@@ -34,7 +71,6 @@ const getQuestionInfo = (): {
   roomHash: string;
   playerId: string;
 } => {
-  console.log("Retreiving questin info");
   const rootObject = document.querySelector("body > div") as VueElement | null;
   if (!rootObject) throw new Error("Could not retreive root object");
   const vue = rootObject.__vue__;
@@ -52,13 +88,19 @@ const getQuestionInfo = (): {
 };
 
 (async () => {
-  console.log("Started!");
+  console.log(
+    `%c 
+  Script created by grzegorz#5119! 
+  https://github.com/gbaranski/quizizz-cheat
+  `,
+    "color: red;"
+  );
   const playerId = prompt(
     "Enter other player name here, he must take a part in quiz!"
   );
   if (!playerId) throw new Error("PlayerID not defined");
   const questionInfo = getQuestionInfo();
-  console.log({ questionID: questionInfo.id, roomHash: questionInfo.roomHash });
+  // console.log({ questionID: questionInfo.id, roomHash: questionInfo.roomHash });
 
   const request: ServerRequest = {
     gameType: "live",

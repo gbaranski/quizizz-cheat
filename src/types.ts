@@ -34,13 +34,13 @@ export interface ResponseProvisional {
     correct: number;
     incorrect: number;
   };
-  teamAdjustments: number;
+  teamAdjustments: [];
 }
 
 export interface Response {
   attempt: number;
   isEvaluated: boolean;
-  provisional: ResponseProvisional;
+  provisional?: ResponseProvisional;
   questionId: string;
   questionType: QuestionType;
   // TODO: Correct type
@@ -85,7 +85,7 @@ export interface ServerResponse {
   playerId: string;
   question: {
     structure: {
-      anwser: any[];
+      answer: any[];
     };
   };
   player: {

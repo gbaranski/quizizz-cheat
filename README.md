@@ -12,4 +12,5 @@ fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/master/dist/bun
 4. Repeat step 2 and 3 every single question.
 
 
+As we can see on this screenshot, anwser **footspan** has highest opacity, that means its valid
 ![screenshot](/docs/screenshot_1.png)

@@ -85,7 +85,8 @@ export interface ServerResponse {
   playerId: string;
   question: {
     structure: {
-      answer: any[];
+      answer: any;
+      options?: any;
     };
   };
   player: {

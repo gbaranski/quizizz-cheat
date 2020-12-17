@@ -53,12 +53,16 @@ const getQuestionInfo = (): {
 
 (async () => {
   console.log("Started!");
+  const playerId = prompt(
+    "Enter other player name here, he must take a part in quiz!"
+  );
+  if (!playerId) throw new Error("PlayerID not defined");
   const questionInfo = getQuestionInfo();
   console.log({ questionID: questionInfo.id, roomHash: questionInfo.roomHash });
 
   const request: ServerRequest = {
     gameType: "live",
-    playerId: questionInfo.playerId,
+    playerId,
     powerupEffects: {
       destroy: [],
     },

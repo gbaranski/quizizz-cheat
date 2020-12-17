@@ -2,35 +2,49 @@ import { ServerRequest, ServerResponse, VueElement } from "./types";
 
 console.log("Hi there!");
 
-const getQuestionVueObject = () => {
+const getQuestionsElement = () => {
   const questionsElem = document.querySelector(
-    "body > div > div.root-component > div > div > div > div.page-container.in-quiz > div.screen.screen-game > div.transitioner.transitioner-component > div > div > div > div > div > div.options-container"
-  ) as VueElement | null;
+    "body > div > div.root-component > div > div > div > div.page-container.in-quiz > div.screen.screen-game > div.transitioner.transitioner-component > div > div > div > div > div > div.options-container > div"
+  );
   if (!questionsElem)
     throw new Error("Unable to retreive questions list element");
-  const vueObject = questionsElem.__vue__;
-  if (!vueObject)
-    throw new Error("Unable to retreive vue object on questions list element");
-  return vueObject;
+
+  return questionsElem;
 };
 
-const getAnswersForArray = (anwsers: any[]) => {
-  const vueObject = getQuestionVueObject();
-  const validAnswers = vueObject.options
-    .filter((e) => anwsers.some((v) => v === e.actualIndex))
-    .map((e) => e.text);
-  console.log(validAnswers);
+const changeElementOpacity = (elem: HTMLElement) => {
+  elem.style.opacity = "20%";
+};
+
+const getAnswersForArray = (anwsers: number[]) => {
+  const questionsElem = getQuestionsElement();
+  const arr: VueElement[] = Array.prototype.slice.call(questionsElem.children);
+  const matching = arr
+    .filter((e) => anwsers.some((v) => v === e.__vue__.optionData.actualIndex))
+    .map((e) => e.innerText);
+  console.log({ matching });
+  const notMatchingElements = arr.filter(
+    (e) => !matching.some((v) => e.innerText === v)
+  );
+  console.log({ notMatchingElements });
+  notMatchingElements.forEach(changeElementOpacity);
 };
 const getAnwsersForSingle = (anwser: number) => {
-  const vueObject = getQuestionVueObject();
-  const validAnswers = vueObject.options
-    .filter((e) => e.actualIndex === anwser)
-    .map((e) => e.text);
-  console.log(validAnswers);
+  const questionsElem = getQuestionsElement();
+  const arr: VueElement[] = Array.prototype.slice.call(questionsElem.children);
+  const matching = arr
+    .filter((e) => e.__vue__.optionData.actualIndex === anwser)
+    .map((e) => e.innerText);
+  console.log({ matching });
+  const notMatchingElements = arr.filter((e) =>
+    matching.some((v) => e.innerText != v)
+  );
+  notMatchingElements.forEach(changeElementOpacity);
 };
 
 const getAnwsersForText = (obj: any[]) => {
   const anwsers = obj.map((e) => e.text);
+  alert(anwsers.join(" or "));
   console.log(anwsers);
 };
 

@@ -1,7 +1,5 @@
 import { ServerRequest, ServerResponse, VueElement } from "./types";
 
-console.log("Hi there!");
-
 const getQuestionsElement = () => {
   const questionsElem = document.querySelector(
     "body > div > div.root-component > div > div > div > div.page-container.in-quiz > div.screen.screen-game > div.transitioner.transitioner-component > div > div > div > div > div > div.options-container > div"

@@ -1,4 +1,4 @@
-export interface VueElement extends Element {
+export interface VueElement extends HTMLElement {
   __vue__: any;
 }
 

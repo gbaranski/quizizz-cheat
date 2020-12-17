@@ -51,7 +51,6 @@ const getQuestionInfo = (): {
   return { id: questionId, roomHash, playerId };
 };
 
-// Some kind of constructor
 (async () => {
   console.log("Started!");
   const questionInfo = getQuestionInfo();

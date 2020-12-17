@@ -8,5 +8,5 @@ fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/master/dist/bun
 .then((res) => res.text()
 .then((t) => eval(t)))
 ```
-3. You'll be asked about player name, You have to put there name of any user that also takes a part in quiz. Answer will be printed out in console.
+3. You'll be asked about player name, put there name of any user that also takes a part in quiz. Answer will be printed out in console.
 4. Repeat step 2 and 3 every single question.

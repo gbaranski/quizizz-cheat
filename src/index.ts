@@ -26,7 +26,7 @@ const sendResponse = async (request: ServerRequest): Promise<void> => {
 
   const json = (await res.json()) as ServerResponse;
   console.log(json);
-  console.log({ anwser: json.question });
+  console.log(json.question);
 };
 
 const getQuestionInfo = (): {

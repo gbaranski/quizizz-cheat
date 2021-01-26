@@ -69,7 +69,7 @@ const sendResponse = async (request: ServerRequest): Promise<void> => {
   });
 
   const json = (await res.json()) as ServerResponse;
-  console.log(json);
+  console.log("Response:", json);
   const answer = json.question.structure.answer;
   if (answer instanceof Array && answer.length > 0) getAnswersForArray(answer);
   else if (typeof answer == "number") getAnwsersForSingle(answer);

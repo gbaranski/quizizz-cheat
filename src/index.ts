@@ -18,11 +18,20 @@ const highlightAnswers = (question: QuizQuestion) => {
   const questionsElem = getQuestionsElement();
   const arr: VueElement[] = Array.prototype.slice.call(questionsElem.children);
 
+  if (question.structure.answer < 1 && question.structure.options) {
+    const answers = question.structure.options.map((option) => option.text).join(" or ");
+    alert(answers);
+
+    return;
+  }
+
   arr.filter((e) => {
-    if (Array.isArray(question.structure.answer)) {
+    if (Array.isArray(question.structure.answer) && question.structure.answer.length > 0) {
       return !(question.structure.answer.some((ansID) => e.__vue__.optionData.actualIndex === ansID));
-    } else {
+    } else if(typeof question.structure.answer == "number") {
       return e.__vue__.optionData.actualIndex !== question.structure.answer
+    } else {
+      console.error("Fail detecting type of question: ", question);
     }
   }).forEach(changeElementOpacity);
 }
@@ -47,6 +56,14 @@ const getQuestionInfo = (): {
   };
 };
 
+const getRoomHash = (): string => {
+  const rootObject = document.querySelector("body > div") as VueElement | null;
+  if (!rootObject) throw new Error("Could not retreive root object");
+  const vue = rootObject.__vue__;
+
+  return vue.$store._vm._data.$$state.game.data.roomHash;
+}
+
 (async () => {
   console.log(
     `%c 
@@ -55,16 +72,25 @@ const getQuestionInfo = (): {
       `,
     "color: red;"
   );
-  const questionInfo = getQuestionInfo();
-  console.log({questionInfo})
-
-  const res = await fetch(`https://quizizz.com/api/main/game/${questionInfo.roomHash}`, {
+  // thanks https://github.com/AndyFilter for this method of retrieving answers
+  const res = await fetch(`https://quizizz.com/api/main/game/${getRoomHash()}`, {
     method: 'GET',
   });
   const quizData = (await res.json()).data as QuizData;
-  for (const q of quizData.questions) {
-    if (questionInfo.questionID === q._id) {
-      highlightAnswers(q);
+
+  let lastQuestionID: string | undefined = undefined;
+
+  setInterval(() => {
+    const questionInfo = getQuestionInfo();
+    if (questionInfo.questionID !== lastQuestionID) {
+      for (const q of quizData.questions) {
+        if (questionInfo.questionID === q._id) {
+          console.log({q});
+          highlightAnswers(q);
+          lastQuestionID = questionInfo.questionID;
+        }
+      }
     }
-  }}
-)();
+  }, 500)
+
+})();

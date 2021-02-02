@@ -1,4 +1,5 @@
 # quizizz-cheat
+## Works on Test and Classic mode
 ## Usage
 
 1. Join quiz, wait for first question
@@ -8,9 +9,8 @@ fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/master/dist/bun
 .then((res) => res.text()
 .then((t) => eval(t)))
 ```
-3. You will be asked about player name, put there name of any user that also takes a part in quiz, that makes the player which name you used fail on all answers on which you use the script, **don't put here your name**.
-4. Repeat step 2 and 3 every single question.
+3. Valid answers will be either highlighted or displayed in alert dialog, there's **no need** to paste this in console every question.
 
 
-As we can see on this screenshot, anwser **footspan** has highest opacity, that means its valid
+As we can see on this screenshot, anwser **www.quizizz.com** has highest opacity, that means its valid
 ![screenshot](/docs/screenshot_1.png)

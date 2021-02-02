@@ -18,7 +18,7 @@ const highlightAnswers = (question: QuizQuestion) => {
   const questionsElem = getQuestionsElement();
   const arr: VueElement[] = Array.prototype.slice.call(questionsElem.children);
 
-  if (question.structure.answer < 1 && question.structure.options) {
+  if (Array.isArray(question.structure.answer) && question.structure.answer.length < 1 && question.structure.options) {
     const answers = question.structure.options.map((option) => option.text).join(" or ");
     alert(answers);
 

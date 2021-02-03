@@ -8,7 +8,7 @@ fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/master/dist/bun
 .then((res) => res.text()
 .then((t) => eval(t)))
 ```
-3. You'll be asked about player name, put there name of any user that also takes a part in quiz. Bad answer will have much lower opacity than the correct ones.
+3. You will be asked about player name, put there name of any user that also takes a part in quiz, that makes the player which name you used fail on all answers on which you use the script, **don't put here your name**.
 4. Repeat step 2 and 3 every single question.
 
 

@@ -11,9 +11,16 @@ export interface QuizQuestion {
   structure: {
     answer: number | number[];
     options?: QuizQuestionOption[];
+    query: {
+      text: string;
+      answer: number;
+    }
   };
 }
 
-export interface QuizData {
-  questions: QuizQuestion[];
+export interface QuizInfo {
+  data: {
+    questions: QuizQuestion[];
+  }
 }
+

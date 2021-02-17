@@ -1,4 +1,4 @@
-import { VueElement, QuizData, QuizQuestion } from "./types";
+import { VueElement, QuizQuestion, QuizInfo } from "./types";
 
 const getQuestionsElement = () => {
   const questionsElem = document.querySelector(
@@ -52,7 +52,7 @@ const getQuestionInfo = (): {
     playerId:   vue.$store._vm._data.$$state.game.player.playerId, 
     quizID:     vue.$store._vm._data.$$state.game.data.quizId,
     roomCode:   vue.$store._vm._data.$$state.game.data.roomCode,
-    questionID: vue.$store._vm.currentQuestion.id
+    questionID: vue.$store._vm._data.$$state.game.questions.currentId,
   };
 };
 
@@ -72,18 +72,15 @@ const getRoomHash = (): string => {
       `,
     "color: red;"
   );
-  // thanks https://github.com/AndyFilter for this method of retrieving answers
-  const res = await fetch(`https://quizizz.com/api/main/game/${getRoomHash()}`, {
-    method: 'GET',
-  });
-  const quizData = (await res.json()).data as QuizData;
+
+  const quiz: QuizInfo = await (await fetch(`https://quizizz.com/api/main/game/${getRoomHash()}`)).json();
 
   let lastQuestionID: string | undefined = undefined;
 
   setInterval(() => {
     const questionInfo = getQuestionInfo();
     if (questionInfo.questionID !== lastQuestionID) {
-      for (const q of quizData.questions) {
+      for (const q of quiz.data.questions) {
         if (questionInfo.questionID === q._id) {
           console.log({q});
           highlightAnswers(q);

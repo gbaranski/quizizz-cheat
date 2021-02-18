@@ -3,7 +3,7 @@
 There are two method of retrieving answers
 
 - [Fetching Quizizz API](#fetching-quizizz-api)
-- [Sending answers as someone else](#sending-answers-as-someone-else)
+- [Sending answers as someone else](#sending-answers-as-someone-else)(old method)
 
 # Methods
 ## Fetching Quizizz API

@@ -22,14 +22,15 @@ fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/master/dist/bun
 
 This works in different way, instead of fetching Quizizz API it sends answer to current question as someone else, Quizizz returns valid answer in response to submission.
 
-1. Join quiz, wait for first question
-2. Open console, paste this code
+1. Join quiz, wait for first question and open console
+2. Paste this code to console
 ```ts
 fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/oldmethod/dist/bundle.js")
 .then((res) => res.text()
 .then((t) => eval(t)))
 ```
-3. Valid answers will be either highlighted or displayed in alert dialog, there's **no need** to paste this in console every question.
+3. Enter user name of any player(he won't get points even if he sent valid answer).
+4. Go to step 2
 
 
 As we can see on this screenshot, anwser **www.quizizz.com** has highest opacity, that means its valid

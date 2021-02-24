@@ -81,14 +81,14 @@ const getRoomHash = (): string => {
   return vue.$store._vm._data.$$state.game.data.roomHash;
 }
 
-(async () => {
-  console.log(
-    `%c 
+const msg = `%c 
     Script created by grzegorz#5119! 
     https://github.com/gbaranski/quizizz-cheat
-      `,
-    "color: red;"
-  );
+      `;
+
+
+(async () => {
+  console.log(msg, "color: red;");
 
   const quiz: QuizInfo = await (await fetch(`https://quizizz.com/api/main/game/${getRoomHash()}`)).json();
 

@@ -118,7 +118,7 @@ const getQuestionInfo = (): {
 (async () => {
   console.log(
     `%c 
-  Script created by grzegorz#5119! 
+  Script created by gbaranski#5119! 
   https://github.com/gbaranski/quizizz-cheat
   `,
     "color: red;"

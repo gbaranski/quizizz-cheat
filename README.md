@@ -35,7 +35,7 @@ fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/oldmethod/dist/
 3. Enter user name of any player(he won't get points even if he sent valid answer).
 4. Go to step 2
 
-## Load automatically using Tampermonkey
+### Load automatically using Tampermonkey
 1. Install the browser extension on **https://www.tampermonkey.net/**
 2. Create a new user script and paste the contents of [Quizizz Cheat.js](/dist/Quizizz%20Cheat.js)
 3. The script should now be automatically loaded every time you enter a quizizz

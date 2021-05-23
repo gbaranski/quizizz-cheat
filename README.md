@@ -37,7 +37,7 @@ fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/oldmethod/dist/
 
 ### Load automatically using Tampermonkey
 1. Install the browser extension on **https://www.tampermonkey.net/**
-2. Create a new user script and paste the contents of [Quizizz Cheat.js](/dist/Quizizz%20Cheat.js)
+2. Create a new user script and paste the contents of [Quizizz Cheat.js](scripts/tampermonkey-alternative-method.js)
 3. The script should now be automatically loaded every time you enter a quizizz
 
 As we can see on this screenshot, answer **www.quizizz.com** has highest opacity, that means its valid

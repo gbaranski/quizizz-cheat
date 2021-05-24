@@ -3,7 +3,7 @@
 There are two methods for retrieving answers.
 
 1. [Fetching Quizizz API](#fetching-quizizz-api)
-2. [Sending answers as someone else](#sending-answers-as-someone-else)(old method)
+2. [Sending answers as someone else](#sending-answers-as-someone-else) (old method)
 
 You can load this script automatically using a browser extension.
 - [Using Tampermonkey](#load-automatically-using-tampermonkey)
@@ -23,7 +23,7 @@ fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/master/dist/bun
 
 ## Sending answers as someone else
 
-An alternative method is more invasive. Instead of fetching Quizizz API, it sends a random answer to a current question as a different user; as a response, Quizizz returns a valid answer, which is then displayed to the user.
+An alternative method is more invasive. Instead of fetching Quizizz API, it sends a random answer to a current question as a different user (consuming his answer); as a response, Quizizz returns a valid answer, which is then displayed to the user.
 
 1. Join quiz, wait for first question, and open console
 2. Paste this code to the console

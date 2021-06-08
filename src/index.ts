@@ -61,7 +61,7 @@ const getQuestionInfo = (): {
   roomCode: string;
 } => {
   const rootObject = document.querySelector("body > div") as VueElement | null;
-  if (!rootObject) throw new Error("Could not retreive root object");
+  if (!rootObject) throw new Error("Could not retrieve root object");
   const vue = rootObject.__vue__;
 
   return { 
@@ -75,7 +75,7 @@ const getQuestionInfo = (): {
 
 const getRoomHash = (): string => {
   const rootObject = document.querySelector("body > div") as VueElement | null;
-  if (!rootObject) throw new Error("Could not retreive root object");
+  if (!rootObject) throw new Error("Could not retrieve root object");
   const vue = rootObject.__vue__;
 
   return vue.$store._vm._data.$$state.game.data.roomHash;

@@ -20,7 +20,7 @@ function onQuizCreate() {
     if (isQuizCreated) return // Quick fix to ensure script is only loaded once
     isQuizCreated = true
 
-    // Start the magic
+    Start the magic
     fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/master/dist/bundle.js")
         .then((res) => res.text()
         .then((t) => eval(t)))

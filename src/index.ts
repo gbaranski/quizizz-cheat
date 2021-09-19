@@ -28,7 +28,7 @@ const getQuestionsElement = () => {
 };
 
 const changeElementOpacity = (elem: HTMLElement) => {
-  elem.style.opacity = "20%";
+  elem.style.opacity = "90%";
 };
 
 const highlightAnswers = (question: QuizQuestion) => {

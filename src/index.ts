@@ -90,7 +90,7 @@ const msg = `%c
 (async () => {
   console.log(msg, "color: red;");
 
-  const quiz: QuizInfo = await (await fetch(`https://quizizz.com/api/main/game/${getRoomHash()}`)).json();
+  const quiz: QuizInfo = await (await fetch(`https://quizizz.com/_api/main/game/${getRoomHash()}`)).json();
 
   let lastQuestionID: string | undefined = undefined;
 

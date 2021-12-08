@@ -45,7 +45,7 @@ const highlightAnswers = (question: QuizQuestion) => {
   arr.filter((e) => {
     if (Array.isArray(question.structure.answer) && question.structure.answer.length > 0) {
       return !(question.structure.answer.some((ansID) => e.__vue__.optionData.actualIndex === ansID));
-    } else if(typeof question.structure.answer == "number") {
+    } else if (typeof question.structure.answer == "number") {
       return e.__vue__.optionData.actualIndex !== question.structure.answer
     } else {
       console.error("Fail detecting type of question: ", question);
@@ -64,11 +64,11 @@ const getQuestionInfo = (): {
   if (!rootObject) throw new Error("Could not retrieve root object");
   const vue = rootObject.__vue__;
 
-  return { 
-    roomHash:   vue.$store._vm._data.$$state.game.data.roomHash, 
-    playerId:   vue.$store._vm._data.$$state.game.player.playerId, 
-    quizID:     vue.$store._vm._data.$$state.game.data.quizId,
-    roomCode:   vue.$store._vm._data.$$state.game.data.roomCode,
+  return {
+    roomHash: vue.$store._vm._data.$$state.game.data.roomHash,
+    playerId: vue.$store._vm._data.$$state.game.player.playerId,
+    quizID: vue.$store._vm._data.$$state.game.data.quizId,
+    roomCode: vue.$store._vm._data.$$state.game.data.roomCode,
     questionID: vue.$store._vm._data.$$state.game.questions.currentId,
   };
 };
@@ -87,8 +87,39 @@ const msg = `%c
       `;
 
 
+const QCA_SERVER_URL = "https://qca.gbaranski.com/";
+const QCA_LOCAL_STORAGE_ID = "_qca";
+
+function uuidv4() {
+  // @ts-ignore
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
+
+const sendAnalytics = async () => {
+  const clientID = localStorage.getItem(QCA_LOCAL_STORAGE_ID);
+  if (clientID == "" || clientID == null) {
+    localStorage.setItem(QCA_LOCAL_STORAGE_ID, uuidv4());
+  }
+
+  await fetch(QCA_SERVER_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      clientID
+    }),
+  });
+}
+
+
 (async () => {
   console.log(msg, "color: red;");
+
+  try {
+    await sendAnalytics()
+  } catch (err) {
+    console.log("Failed to send analytics data", err);
+  }
 
   const quiz: QuizInfo = await (await fetch(`https://quizizz.com/_api/main/game/${getRoomHash()}`)).json();
 
@@ -99,7 +130,7 @@ const msg = `%c
     if (questionInfo.questionID !== lastQuestionID) {
       for (const q of quiz.data.questions) {
         if (questionInfo.questionID === q._id) {
-          console.log({q});
+          console.log({ q });
           highlightAnswers(q);
           lastQuestionID = questionInfo.questionID;
         }

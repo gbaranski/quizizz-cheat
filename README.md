@@ -32,7 +32,7 @@ fetch("https://raw.githubusercontent.com/gbaranski/quizizz-cheat/oldmethod/dist/
 .then((res) => res.text()
 .then((t) => eval(t)))
 ```
-3. Enter the user name of any other player (he won't get points even if he sent a valid answer).
+3. Enter the user name of any other player (the user won't get points even if they sent a valid answer).
 4. Go to step 2
 
 ### Load automatically using Tampermonkey
